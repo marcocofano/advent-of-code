@@ -31,7 +31,8 @@ MATCHES_DICT = {key: value for key, value in zip(NUMBERS_WORDS, NUMBERS)}
 
 def read_input(filepath: str) -> list:
     with open(filepath, 'r') as file:
-        return [line for line in file]
+        for line in file:
+            yield line.strip()
 
 
 def find_integer(string):
@@ -58,12 +59,12 @@ def parse_calibration_line_improved(line):
 
 
 @timing
-def part_one(inputs: list) -> int:
-    # inputs = read_input(filepath)
-    return sum(map(parse_calibration_line, inputs))
+def part_one(filepath: str) -> int:
+    return sum([parse_calibration_line(line)
+                for line in read_input(filepath=filepath)])
 
 
 @timing
-def part_two(inputs: list) -> int:
-    # inputs = read_input(filepath)
-    return sum(list(map(parse_calibration_line_improved, inputs)))
+def part_two(filepath: str) -> int:
+    return sum([parse_calibration_line_improved(line)
+                for line in read_input(filepath=filepath)])
