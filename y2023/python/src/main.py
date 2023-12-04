@@ -1,8 +1,8 @@
-from d02.solution import part_one, part_two
+from d03.solution import part_one, part_two
 
 
 def main():
-    filepath = '../../inputs/d02.txt'
+    filepath = '../../inputs/d03.txt'
     print(f"Part 1 result: {part_one(filepath)}")
     print(f"Part 2 result: {part_two(filepath)}")
 

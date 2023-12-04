@@ -1,0 +1,69 @@
+from common.tools import timing
+import re
+from common.parse import read_input
+import math
+import string
+from collections import defaultdict
+
+
+SYMBOLS = set(string.punctuation) - set(".")
+
+
+def check(start_pos, end_pos, row):
+    return any(item in SYMBOLS for item in row[start_pos:end_pos + 1])
+
+
+def check_star(start_pos, end_pos, row):
+    return [
+        start_pos + i for i, item in enumerate(row[start_pos:end_pos + 1]) if item == '*'
+    ]
+
+
+@timing
+def part_one(filepath: str) -> int:
+    input = [list(line) for line in read_input(filepath)]
+    tot_rows = len(input)
+    tot_cols = len(input[0])
+    result = 0
+    for r, row in enumerate(input):
+        row_str = ''.join(row)
+        numbers = re.finditer(r"\d+", row_str)
+        for number in numbers:
+            col_start = max(0, number.start() - 1)
+            col_end = min(number.end(), tot_cols)
+            for check_row in [-1, 0, 1]:
+                if (r != 0) and (r != tot_rows - 1):
+                    if check(
+                        start_pos=col_start,
+                        end_pos=col_end,
+                        row=input[r + check_row]
+                    ):
+                        result += int(number.group())
+                        continue
+    return result
+
+
+@timing
+def part_two(filepath: str) -> int:
+    gears = defaultdict(list)
+    input = [list(line) for line in read_input(filepath)]
+    tot_rows = len(input)
+    tot_cols = len(input[0])
+    for r, row in enumerate(input):
+        row_str = ''.join(row)
+        numbers = re.finditer(r"\d+", row_str)
+        for number in numbers:
+            col_start = max(0, number.start() - 1)
+            col_end = min(number.end(), tot_cols)
+            for check_row in [-1, 0, 1]:
+                if (r != 0) and (r != tot_rows - 1):
+                    star_cols = check_star(
+                        start_pos=col_start,
+                        end_pos=col_end,
+                        row=input[check_row + r]
+                    )
+                    if star_cols:
+                        for star_col in star_cols:
+                            gears[(r, star_col)].append(int(number.group()))
+                        continue
+    return sum([math.prod(value) for _, value in gears.items() if len(value) == 2])

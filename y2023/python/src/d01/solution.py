@@ -1,5 +1,7 @@
 import re
 from common.tools import timing
+from common.parse import read_input
+
 
 NUMBERS = [
     '1',
@@ -27,12 +29,6 @@ NUMBERS_WORDS = [
 PATTERN = f"(\\d|{'|'.join(NUMBERS_WORDS)})"
 PATTERN_REV = f"(\\d|{'|'.join([nw[::-1] for nw in NUMBERS_WORDS])})"
 MATCHES_DICT = {key: value for key, value in zip(NUMBERS_WORDS, NUMBERS)}
-
-
-def read_input(filepath: str) -> list:
-    with open(filepath, 'r') as file:
-        for line in file:
-            yield line.strip()
 
 
 def find_integer(string):

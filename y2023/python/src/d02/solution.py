@@ -1,17 +1,12 @@
 from common.tools import timing
 import math
+from common.parse import read_input
 
 VALIDATION = {
     'red': 12,
     'green': 13,
     'blue': 14
 }
-
-
-def read_input(filepath: str) -> list:
-    with open(filepath, 'r') as file:
-        for line in file:
-            yield line.strip()
 
 
 def parse_line(line):
