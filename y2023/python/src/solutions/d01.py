@@ -1,7 +1,6 @@
 import re
-from common.tools import timing
-from common.parse import read_input
-
+from lib.tools import timing
+from lib.solution import DailyPuzzleBase
 
 NUMBERS = [
     '1',
@@ -54,13 +53,16 @@ def parse_calibration_line_improved(line):
     return first*10 + last
 
 
-@timing
-def part_one(filepath: str) -> int:
-    return sum([parse_calibration_line(line)
-                for line in read_input(filepath=filepath)])
+class Solution(DailyPuzzleBase):
+    def __init__(self, day):
+        super().__init__(day)
 
+    @timing
+    def part_one(self, input) -> int:
+        return sum([parse_calibration_line(line)
+                    for line in input])
 
-@timing
-def part_two(filepath: str) -> int:
-    return sum([parse_calibration_line_improved(line)
-                for line in read_input(filepath=filepath)])
+    @timing
+    def part_two(self, input) -> int:
+        return sum([parse_calibration_line_improved(line)
+                    for line in input])

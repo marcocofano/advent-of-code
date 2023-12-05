@@ -1,6 +1,7 @@
-from common.tools import timing
+from lib.tools import timing
 import math
-from common.parse import read_input
+from lib.solution import DailyPuzzleBase
+
 
 VALIDATION = {
     'red': 12,
@@ -36,11 +37,14 @@ def parse_line_2(line):
     return math.prod(colours_min)
 
 
-@timing
-def part_one(filepath: str) -> int:
-    return sum([parse_line(line) for line in read_input(filepath)])
+class Solution(DailyPuzzleBase):
+    def __init__(self, day):
+        super().__init__(day)
 
+    @timing
+    def part_one(self, input) -> int:
+        return sum([parse_line(line) for line in input])
 
-@timing
-def part_two(filepath: str) -> int:
-    return sum([parse_line_2(line) for line in read_input(filepath)])
+    @timing
+    def part_two(self, input) -> int:
+        return sum([parse_line_2(line) for line in input])
