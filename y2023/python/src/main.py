@@ -2,7 +2,7 @@ import argparse
 import importlib
 import datetime
 # from utils.submission import Submission
-from lib import files
+from aoc import files
 
 
 def main():

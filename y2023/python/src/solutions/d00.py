@@ -1,5 +1,5 @@
-from lib.tools import timing
-from lib.solution import DailyPuzzleBase
+from aoc.tools import timing
+from aoc.solution import DailyPuzzleBase
 
 
 class Solution(DailyPuzzleBase):

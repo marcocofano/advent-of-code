@@ -1,6 +1,6 @@
 import re
-from lib.tools import timing
-from lib.solution import DailyPuzzleBase
+from aoc.tools import timing
+from aoc.solution import DailyPuzzleBase
 
 NUMBERS = [
     '1',
@@ -48,7 +48,7 @@ def parse_calibration_line_improved(line):
     start_match = re.search(PATTERN, line).group(1)
     end_match = re.search(PATTERN_REV, line[::-1]).group(1)
     end_match = end_match[::-1]
-    first = int(MATCHES_DICT.get(start_match, start_match))
+ aoc   first = int(MATCHES_DICT.get(start_match, start_match))
     last = int(MATCHES_DICT.get(end_match, end_match))
     return first*10 + last
 

@@ -1,5 +1,5 @@
-from lib.solution import DailyPuzzleBase
-from lib.tools import timing
+from aoc.solution import DailyPuzzleBase
+from aoc.tools import timing
 import re
 import math
 import string

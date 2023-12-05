@@ -1,6 +1,6 @@
-from lib.tools import timing
+from aoc.tools import timing
 import math
-from lib.solution import DailyPuzzleBase
+from aoc.solution import DailyPuzzleBase
 
 
 VALIDATION = {
