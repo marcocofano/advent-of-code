@@ -25,7 +25,7 @@ class DailyPuzzleBase:
         test_input = self.get_test_input(part)
         test_result = self.get_test_result(part)
         function_part = getattr(self, f"part_{PARTS[part]}")
-        return (function_part(test_input) == test_result, test_result)
+        return (function_part(test_input) == test_result, function_part(test_input))
 
     def test_all(self) -> list[bool]:
         return [self.run_test(part=i) for i in [1, 2]]
