@@ -1,6 +1,3 @@
-
-use std::str::Split;
-
 use advent_of_code::parsers::lines;
 use itertools::Itertools;
 
