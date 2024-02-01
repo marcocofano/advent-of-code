@@ -171,8 +171,36 @@ pub fn part_one(input: &str) -> Option<usize> {
     Some(memo.iter().map(|s| s.position).unique().count())
 }
 
-pub fn part_two(input: &str) -> Option<u32> {
-    todo!()
+pub fn part_two(input: &str) -> Option<usize> {
+    let mut results: Vec<usize> = vec![];
+    let mut starting_states: Vec<State> = vec![];
+    let grid = Grid::new(input);
+    for i in 0..grid.width {
+        starting_states.extend([
+            State {
+                position: (0, i as i32),
+                direction: Direction::Down,
+            },
+            State {
+                position: (i as i32, (grid.width - 1) as i32),
+                direction: Direction::Left,
+            },
+            State {
+                position: ((grid.height - 1) as i32, i as i32),
+                direction: Direction::Up,
+            },
+            State {
+                position: (i as i32, 0),
+                direction: Direction::Right,
+            },
+        ])
+    }
+    for ss in starting_states {
+        let mut memo: HashSet<State> = HashSet::new();
+        grid.energize(ss, &mut memo);
+        results.push(memo.iter().map(|s| s.position).unique().count());
+    }
+    results.iter().max().copied()
 }
 
 #[cfg(test)]
